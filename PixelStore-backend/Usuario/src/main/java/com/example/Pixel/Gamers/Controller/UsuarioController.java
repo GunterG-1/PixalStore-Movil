@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.http.HttpStatus;
+import com.example.Pixel.Gamers.Dto.LoginRequest;
+import com.example.Pixel.Gamers.Dto.LoginResponse;
 import com.example.Pixel.Gamers.Model.Usuario;
+import com.example.Pixel.Gamers.Repository.UsuarioRepository;
+
 import com.example.Pixel.Gamers.Service.UsuarioService;
 
 @RestController
@@ -24,6 +28,12 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    @Autowired
+    private org.springframework.security.crypto.password.PasswordEncoder passwordEncoder;
 
     @GetMapping
     public List<Usuario> getAllUsuarios() {
@@ -45,21 +55,19 @@ public class UsuarioController {
         return usuarioService.createUsuario(usuario);
     }
     
+  
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-    Usuario usuario = usuarioRepository.findByEmail(loginRequest.getEmail());
-    
-   
-    if (usuario != null && passwordEncoder.matches(loginRequest.getPassword(), usuario.getPassword())) {
-       
-        String token = "jwt-token-generado-aqui";
-        LoginResponse response = new LoginResponse(token);
-        return ResponseEntity.ok(response);
-    } else {
-        
-        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        Usuario usuario = usuarioRepository.findByEmail(loginRequest.getEmail());
+        if (usuario != null && passwordEncoder.matches(loginRequest.getPassword(), usuario.getPassword())) {
+            
+            String token = "jwt-token-generado";
+            LoginResponse response = new LoginResponse(token);
+            return ResponseEntity.ok(response);
+        } else {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
     }
-}
 
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
