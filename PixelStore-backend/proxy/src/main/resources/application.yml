@@ -48,11 +48,15 @@ spring:
           uri: http://localhost:8081
           predicates:
             - Path=/usuarios/**
+          filters:
+            - StripPrefix=1
 
         - id: productos
           uri: http://localhost:8082
           predicates:
             - Path=/productos/**
+          filters:
+            - StripPrefix=1
 
 
 
