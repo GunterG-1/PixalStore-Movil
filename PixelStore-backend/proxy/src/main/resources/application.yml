@@ -45,14 +45,15 @@ spring:
 
         # Solo rutas de producto y usuario
         - id: usuarios
-          uri: http://localhost:8082
+          uri: http://localhost:8081
           predicates:
             - Path=/usuarios/**
 
         - id: productos
-          uri: http://localhost:8081
+          uri: http://localhost:8082
           predicates:
             - Path=/productos/**
+
 
 
 
