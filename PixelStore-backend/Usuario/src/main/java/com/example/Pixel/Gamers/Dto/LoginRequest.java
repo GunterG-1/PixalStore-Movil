@@ -2,15 +2,15 @@ package com.example.Pixel.Gamers.Dto;
 
 public class LoginRequest {
     private String email;
-    private String password;
+    private String contrasena;
 
     // Constructor vacío
     public LoginRequest() {}
 
     // Constructor con parámetros
-    public LoginRequest(String email, String password) {
+    public LoginRequest(String email, String contrasena) {
         this.email = email;
-        this.password = password;
+        this.contrasena = contrasena;
     }
 
     // Getters y setters
@@ -22,11 +22,11 @@ public class LoginRequest {
         this.email = email;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

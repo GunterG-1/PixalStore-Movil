@@ -57,7 +57,7 @@ public class UsuarioController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
     Usuario usuario = usuarioRepository.findByEmail(loginRequest.getEmail());
-    if (usuario != null && loginRequest.getPassword().equals(usuario.getPassword())) {
+    if (usuario != null && loginRequest.getContrasena().equals(usuario.getContrasena())) {
         String token = "jwt-token-generado";
         LoginResponse response = new LoginResponse(token);
         return ResponseEntity.ok(response);
