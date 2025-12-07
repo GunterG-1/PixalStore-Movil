@@ -1,8 +1,0 @@
-com\example\Pixel\Gamers\Controller\UsuarioController.class
-com\example\Pixel\Gamers\Dto\LoginResponse.class
-com\example\Pixel\Gamers\Dto\LoginRequest.class
-com\example\Pixel\Gamers\Repository\UsuarioRepository.class
-com\example\Pixel\Gamers\Model\Usuario.class
-com\example\Pixel\Gamers\Application.class
-com\example\Pixel\Gamers\Config\OpenApiConfig.class
-com\example\Pixel\Gamers\Service\UsuarioService.class

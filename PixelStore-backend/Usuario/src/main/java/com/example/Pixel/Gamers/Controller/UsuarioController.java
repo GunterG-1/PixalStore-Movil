@@ -58,16 +58,15 @@ public class UsuarioController {
   
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-        Usuario usuario = usuarioRepository.findByEmail(loginRequest.getEmail());
-        if (usuario != null && passwordEncoder.matches(loginRequest.getPassword(), usuario.getPassword())) {
-            
-            String token = "jwt-token-generado";
-            LoginResponse response = new LoginResponse(token);
-            return ResponseEntity.ok(response);
-        } else {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        }
+    Usuario usuario = usuarioRepository.findByEmail(loginRequest.getEmail());
+    if (usuario != null && loginRequest.getPassword().equals(usuario.getPassword())) {
+        String token = "jwt-token-generado";
+        LoginResponse response = new LoginResponse(token);
+        return ResponseEntity.ok(response);
+    } else {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
+}
 
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> updateUsuario(@PathVariable Long id, @RequestBody Usuario usuario) {
